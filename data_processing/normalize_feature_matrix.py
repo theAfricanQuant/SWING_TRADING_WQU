@@ -72,31 +72,20 @@ ADXR_columns = ['M1_ADXR_14', 'M5_ADXR_14', 'M15_ADXR_14', 'M30_ADXR_14', 'M60_A
 CDL_columns = []
 prefix_list = ['M1_', 'M5_', 'M15_', 'M30_', 'M60_', 'D_', 'W_', 'M_']
 for x in prefix_list:
-    for name in talib.get_function_groups()['Pattern Recognition']:
-        CDL_columns.append(x + name)
-
+    CDL_columns.extend(
+        x + name for name in talib.get_function_groups()['Pattern Recognition']
+    )
 cdl_scaler = MinMaxScaler(feature_range=(-1, 1))
 cdl_scaler_list = np.array([-100, 100]).astype(float).reshape(-1, 1)
 cdl_scaler.fit_transform(cdl_scaler_list)
 
-#APO scale using cumulative ratio to close
-APO_columns = []
-for x in prefix_list:
-    APO_columns.append(x + 'APO')
-
-
+APO_columns = [x + 'APO' for x in prefix_list]
 #AROON range 0-100 use adx scaler here also
 Aroon_columns = []
 Aroon_column_names = ['Aroon_down_14', 'Aroon_up_14', 'AROONOSC_14']
 for x in prefix_list:
-    for y in Aroon_column_names:
-        Aroon_columns.append(x + y)
-
-#BOP value is between -1 and 1 so no need to normalize
-BOP_columns =[]
-for x in prefix_list:
-    BOP_columns.append(x + 'BOP')
-
+    Aroon_columns.extend(x + y for y in Aroon_column_names)
+BOP_columns = [x + 'BOP' for x in prefix_list]
 #CCI - range outside -100,100 is possible but scale using cdlscaler
 #CMO - range -100 to 100
 CCI_CMO_Columns = []

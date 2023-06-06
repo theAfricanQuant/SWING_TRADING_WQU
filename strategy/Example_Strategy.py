@@ -18,9 +18,8 @@ class Example_Strategy(Strategy):
         Full_Featured_Matrix = []
         for i in range(len(data_all[0])):
             print(i, "/", len(data_all[0]))
-            INSIDE_MATRIX = []
             datapoint = data_all[0].index[i]
-            INSIDE_MATRIX.append(datapoint)
+            INSIDE_MATRIX = [datapoint]
             Feat_mat_list, Feat_mat_2 = get_featured_matrix(data_all, datapoint)
             INSIDE_MATRIX.append(Feat_mat_2)
             Full_Featured_Matrix.append(INSIDE_MATRIX)
@@ -159,7 +158,7 @@ class Example_Strategy(Strategy):
 
 
 
-Ex_Port = Portfolio("Example_strategy_1",datetime.datetime.today(),10000)
+Ex_Port = Portfolio("Example_strategy_1", datetime.datetime.now(), 10000)
 Ex_Strategy_1 = Example_Strategy('Example_Strategy',Ex_Port)
 from SWING_TRADING_WQU.data_processing.data_preprocessing import get_higher_timeframe,read_train_data
 path = "Intraday_Trader/rawdata/rawdata_set1/"

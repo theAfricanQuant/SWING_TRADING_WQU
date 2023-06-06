@@ -17,10 +17,7 @@ class UnrealizedPnL:
             self.symbols[new_data.symbol] = 0
 
     def calculate(self):
-        Total = 0
-        for i in self.symbols:
-            Total += self.symbols[i]
-        return Total
+        return sum(self.symbols[i] for i in self.symbols)
 
 
 class Commissions:
@@ -279,10 +276,10 @@ class Portfolio:
             self.calculate_holding_peroid()
 
     def capital_tracker(self, new_data):
-        Used_Capital = 0
-        for each_order in self.Open_Trades:
-            Used_Capital += (each_order.margin_required / each_order.order_leverage)
-
+        Used_Capital = sum(
+            (each_order.margin_required / each_order.order_leverage)
+            for each_order in self.Open_Trades
+        )
         self.UsedCapital = Used_Capital
         self.FreeCapital = self.TotalCapital - self.UsedCapital
 

@@ -123,8 +123,7 @@ Daily : 1 month daily data with MAs, BBB, MACDs.
 
 
 def get_current_state(stock, data_point):
-    current_state = []
-    current_state.append(stock[0].loc[:data_point])
+    current_state = [stock[0].loc[:data_point]]
     for i in range(1, len(stock)):
 
 

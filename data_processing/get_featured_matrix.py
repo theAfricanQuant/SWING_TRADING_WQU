@@ -13,11 +13,9 @@ from SWING_TRADING_WQU.indicators.add_indicators import add_overlap_studies, add
 path = "Intraday_Trader/rawdata/rawdata_set1/"
 
 symbol_list = os.listdir(path)
-symbol_list_new = []
-for i in range(len(symbol_list)):
-    if i % 2 == 0:
-        symbol_list_new.append(symbol_list[i][:-7])
-
+symbol_list_new = [
+    symbol_list[i][:-7] for i in range(len(symbol_list)) if i % 2 == 0
+]
 symbol = symbol_list_new[0]
 
 data_minute, data_daily = read_train_data(path, symbol)

@@ -79,6 +79,4 @@ def get_features(raw_data):
 
 	indicators = raw_data[indicator_col_list]
 
-	features_full = pd.concat([features,indicators],axis=1)
-
-	return features_full
+	return pd.concat([features,indicators],axis=1)

@@ -37,15 +37,19 @@ class Order():
 
     def check_LandS_Condition(self):
         if self.direction == 'Long':
-            if self.entry_price <= self.stop_price or self.entry_price >= self.target_price:
-                return -99
-            else:
-                return 1
+            return (
+                -99
+                if self.entry_price <= self.stop_price
+                or self.entry_price >= self.target_price
+                else 1
+            )
         elif self.direction == 'Short':
-            if self.entry_price >= self.stop_price or self.entry_price <= self.target_price:
-                return -99
-            else:
-                return 1
+            return (
+                -99
+                if self.entry_price >= self.stop_price
+                or self.entry_price <= self.target_price
+                else 1
+            )
 
     def generate_trade(self):
         ID = random_with_N_digits(15)
@@ -53,18 +57,16 @@ class Order():
         return ID
 
     def get_target_order_id(self,ID):
-        target_Id = random_with_N_digits(15)
-        return target_Id
+        return random_with_N_digits(15)
     def get_stop_order_id(self,ID):
-        stop_Id = random_with_N_digits(15)
-        return stop_Id
+        return random_with_N_digits(15)
 
     def calculate_value(self):
         if self.direction == 'Long':
             self.buy_value = self.entry_price*self.quantity
             self.sell_value = 0
             self.margin_required = self.buy_value
-        if self.direction == 'Short':
+        elif self.direction == 'Short':
             self.buy_value = 0
             self.sell_value = self.entry_price*self.quantity
             self.margin_required = self.sell_value

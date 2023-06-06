@@ -5,9 +5,6 @@ import SWING_TRADING_WQU.indicators.add_indicators as add_indicators
 
 def get_featured_matrix(data_all,datapoint):
 
-    FEATURED_MATRIX = []
-
-
     curr_state= pre_processing.get_current_state(data_all,datapoint)
     featured_data = add_indicators.add_pivots(curr_state)
     featured_data = add_indicators.add_overlap_studies(curr_state)
@@ -42,17 +39,16 @@ def get_featured_matrix(data_all,datapoint):
     data_M = data_M.dropna()
 
 
-    FEATURED_MATRIX.append(data_1min.values)
-    FEATURED_MATRIX.append(data_5min.values)
-    FEATURED_MATRIX.append(data_15min.values)
-    FEATURED_MATRIX.append(data_30min.values)
-    FEATURED_MATRIX.append(data_60min.values)
-    FEATURED_MATRIX.append(data_D.values)
-    FEATURED_MATRIX.append(data_W.values)
-    FEATURED_MATRIX.append(data_M.values)
-
-
-
+    FEATURED_MATRIX = [
+        data_1min.values,
+        data_5min.values,
+        data_15min.values,
+        data_30min.values,
+        data_60min.values,
+        data_D.values,
+        data_W.values,
+        data_M.values,
+    ]
     return FEATURED_MATRIX, [data_1min,data_5min,data_15min,data_30min,data_60min,data_D,data_W,data_M]
 
 
